@@ -61,7 +61,6 @@ class TaskController {
     
     func toggleisComplete(task: Task){
         task.isComplete = !task.isComplete
-       // fetchedResultsController.didChangeValue(forKey: "isComplete")
         saveToPersistentStore()
         
     }

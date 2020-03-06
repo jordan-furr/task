@@ -12,17 +12,13 @@ import CoreData
 class NewTaskTableViewController: UITableViewController, NSFetchedResultsControllerDelegate{
 
  override func viewDidLoad() {
+       super.viewDidLoad()
     TaskController.shared.fetchedResultsController.delegate = self
-        super.viewDidLoad()
+     
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        tableView.reloadData()
-    }
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return TaskController.shared.fetchedResultsController.sections?.count ?? 0
     }
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -80,6 +76,22 @@ class NewTaskTableViewController: UITableViewController, NSFetchedResultsControl
             print("error")
         }
     }
+    
+   func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+       switch type {
+       case .delete:
+           tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+       case .insert:
+           tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+       case .move:
+           break
+       case .update:
+           break
+       @unknown default:
+           fatalError()
+       }
+   }
+    
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
