@@ -100,8 +100,8 @@ class NewTaskTableViewController: UITableViewController, NSFetchedResultsControl
 extension NewTaskTableViewController: ButtonTableViewCellDelegate {
     func tappedButton(for cell: ButtonTableViewCell) {
         guard let task = cell.task else {return}
-        cell.updateButton(iscomplete: task.isComplete)
         TaskController.shared.toggleisComplete(task: task)
+        cell.updateButton(iscomplete: task.isComplete)
         tableView.reloadData()
     }
 }
