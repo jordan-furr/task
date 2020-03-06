@@ -15,12 +15,15 @@ class ButtonTableViewCell: UITableViewCell {
     var task: Task?
     
     weak var delegate: ButtonTableViewCellDelegate?
+
     @IBOutlet weak var checkButton: UIButton!
+    
     @IBAction func buttonTapped(_ sender: Any) {
         delegate?.tappedButton(for: self)
     }
     
     @IBOutlet weak var labelText: UILabel!
+    
     func setTask(task: Task, _isComplete: Bool){
         self.task = task
         updateUI(_isComplete: _isComplete)

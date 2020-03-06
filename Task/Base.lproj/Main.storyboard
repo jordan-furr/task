@@ -9,7 +9,7 @@
         <!--Tasks-->
         <scene sceneID="H2v-Gl-pw4">
             <objects>
-                <tableViewController id="V1g-BG-ad3" customClass="TaskTableViewController" customModule="Task" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="V1g-BG-ad3" customClass="NewTaskTableViewController" customModule="Task" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ydM-AW-RaN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -30,7 +30,7 @@
                                             </constraints>
                                             <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                             <connections>
-                                                <action selector="buttonTapped:" destination="2vw-YE-ZdJ" eventType="touchUpInside" id="DMN-Wc-qBd"/>
+                                                <action selector="buttonTapped:" destination="2vw-YE-ZdJ" eventType="touchUpInside" id="Q8b-6w-jPh"/>
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iu6-sp-rFv">
@@ -54,8 +54,8 @@
                                     <constraint firstItem="0Ek-Pz-pgY" firstAttribute="centerY" secondItem="2vw-YE-ZdJ" secondAttribute="centerY" id="gdv-at-EMo"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="checkButton" destination="0Ek-Pz-pgY" id="FPb-Ar-wqV"/>
-                                    <outlet property="labelText" destination="Iu6-sp-rFv" id="33H-jC-SsT"/>
+                                    <outlet property="checkButton" destination="0Ek-Pz-pgY" id="Xgz-RF-FBp"/>
+                                    <outlet property="labelText" destination="Iu6-sp-rFv" id="FQL-Zw-cyH"/>
                                     <segue destination="S1Z-ZO-dy4" kind="show" identifier="toDetailView" id="GQJ-9o-NSD"/>
                                 </connections>
                             </tableViewCell>
@@ -236,6 +236,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="GQJ-9o-NSD"/>
+        <segue reference="Ymq-rd-hID"/>
     </inferredMetricsTieBreakers>
 </document>

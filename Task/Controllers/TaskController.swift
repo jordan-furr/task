@@ -16,42 +16,39 @@ class TaskController {
     static let shared = TaskController()
     
     //MARK: Source of Truth
-    var tasks: [Task] = []
+    let fetchedResultsController: NSFetchedResultsController<Task>  = {
+        let request: NSFetchRequest<Task> = Task.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "isComplete", ascending: false), NSSortDescriptor(key: "due", ascending: false)]
+        let resultsController: NSFetchedResultsController<Task> = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.context, sectionNameKeyPath: "isComplete", cacheName: nil)
+        return resultsController
+    }()
     
     init() {
-        tasks = fetchRequest()
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            print("Error")
+        }
     }
-    
-    func fetchRequest() -> [Task] {
-        let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
-        return (try? CoreDataStack.context.fetch(fetchRequest)) ?? []
-    }
-    
     
     //MARK: CRUD
     
     func add(taskWithName name: String, notes: String?, due: Date?){
         Task(name: name, notes: notes, due: due, isComplete: false)
         saveToPersistentStore()
-        tasks = fetchRequest()
     }
     
     func update(task: Task, name: String, notes: String?, due: Date?){
-        if let index = tasks.firstIndex(of: task){
-            tasks[index].name = name
-            tasks[index].notes = notes
-            tasks[index].due = due
-        }
+        task.name = name
+        task.notes = notes
+        task.due = due
         saveToPersistentStore()
-        tasks = fetchRequest()
     }
     
     func remove(task: Task) {
-        if let index = tasks.firstIndex(of: task){
-            tasks.remove(at: index)
+        CoreDataStack.context.delete(task)
             saveToPersistentStore()
-            tasks = fetchRequest()
-        }
+        
     }
     
     func saveToPersistentStore() {
@@ -64,6 +61,8 @@ class TaskController {
     
     func toggleisComplete(task: Task){
         task.isComplete = !task.isComplete
+       // fetchedResultsController.didChangeValue(forKey: "isComplete")
         saveToPersistentStore()
+        
     }
 }
